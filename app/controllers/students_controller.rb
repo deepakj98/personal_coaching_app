@@ -10,7 +10,7 @@ class StudentsController < ApplicationController
   def create
     @student = Student.new(student_params)
     if @student.save
-      redirect_to @student, notice: 'Student and installments created successfully.'
+      redirect_to @student
     else
       render :new
     end

@@ -7,6 +7,6 @@ class InstallmentsController < ApplicationController
 
     @student.pay_installment(installment_index, amount_paid, action)
 
-    redirect_to student_path(@student), notice: 'Payment processed successfully.'
+    redirect_to student_path(@student)
   end
 end
