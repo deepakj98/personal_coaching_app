@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CoachingApp</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <div style="background-color: #6693c3; color: white; padding: 20px; text-align: center; font-size: 24px; font-weight: bold; border-radius: 8px;">
+      Coaching App
+    </div>
+
+    </nav>
+    <%= yield %>
+  </body>
+</html>

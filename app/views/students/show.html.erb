@@ -1,0 +1,25 @@
+<h1><%= @student.name %>'s Installments</h1>
+<ul>
+  <% @student.installments.each_with_index do |installment, index| %>
+    <li>
+      Installment <%= index + 1 %>: <%= installment.amount %> 
+      <% if installment.paid %>
+        (Paid)
+        <div>payment date: <%= installment.payment_date&.strftime("%B %d, %Y") %> </div>
+      <% else %>
+        (Not Paid)
+        <%= form_with url: pay_installment_path(@student), local: true do |form| %>
+          <%= form.hidden_field :installment_index, value: index %>
+          <%= form.number_field :amount_paid, placeholder: "Amount" %>
+          <label>Action</label>
+          <%= form.select :action_choice, [['Add to next installment', 'add_to_next'], ['Create new installment', 'create_new']] %>
+          <%= form.submit "Pay Installment", style: "background-color: #28a745; color: white; padding: 8px 15px;" %>
+        <% end %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<div style="margin-top: 20px;">
+  <%= link_to 'Back', students_path, style: "color: #007bff; text-decoration: none; font-size: 18px;" %>
+</div>
