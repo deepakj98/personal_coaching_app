@@ -4,17 +4,17 @@
   <%= form_with model: @student, local: true do |form| %>
     <div style="margin-bottom: 15px;">
       <%= form.label :name, style: "font-weight: bold; display: block; margin-bottom: 5px;" %>
-      <%= form.text_field :name, style: "width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 4px;" %>
+      <%= form.text_field :name,required: true, style: "width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 4px;" %>
     </div>
 
     <div style="margin-bottom: 15px;">
       <%= form.label :total_amount, style: "font-weight: bold; display: block; margin-bottom: 5px;" %>
-      <%= form.number_field :total_amount, style: "width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 4px;" %>
+      <%= form.number_field :total_amount,  required: true, style: "width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 4px;" %>
     </div>
 
     <div style="margin-bottom: 15px;">
       <%= form.label :number_of_installments, style: "font-weight: bold; display: block; margin-bottom: 5px;" %>
-      <%= form.number_field :number_of_installments, style: "width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 4px;" %>
+      <%= form.number_field :number_of_installments,  required: true, style: "width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 4px;" %>
     </div>
 
     <div style="text-align: center;">
