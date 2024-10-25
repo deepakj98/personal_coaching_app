@@ -1,28 +1,27 @@
-
-<div style="max-width: 500px; margin: 0 auto; padding: 20px; background-color: #ccd3db; border-radius: 8px;">
+<div class="student_new_page" style="">
   <h1>New Student</h1>
   <%= form_with model: @student, local: true do |form| %>
     <div style="margin-bottom: 15px;">
-      <%= form.label :name, style: "font-weight: bold; display: block; margin-bottom: 5px;" %>
-      <%= form.text_field :name,required: true, style: "width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 4px;" %>
+      <%= form.label :name, class:"form_label_tag" %>
+      <%= form.text_field :name,required: true, class: "form_input_field" %>
     </div>
 
     <div style="margin-bottom: 15px;">
-      <%= form.label :total_amount, style: "font-weight: bold; display: block; margin-bottom: 5px;" %>
-      <%= form.number_field :total_amount,  required: true, style: "width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 4px;" %>
+      <%= form.label :total_amount, class:"form_label_tag" %>
+      <%= form.number_field :total_amount, min:10000, max:20000, required: true, class: "form_input_field" %>
     </div>
 
     <div style="margin-bottom: 15px;">
-      <%= form.label :number_of_installments, style: "font-weight: bold; display: block; margin-bottom: 5px;" %>
-      <%= form.number_field :number_of_installments,  required: true, style: "width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 4px;" %>
+      <%= form.label :number_of_installments, class:"form_label_tag" %>
+      <%= form.number_field :number_of_installments,  required: true, class: "form_input_field" %>
     </div>
 
     <div style="text-align: center;">
-      <%= form.submit "Submit", style: "background-color: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;" %>
+      <%= form.submit "Submit", class:"submit_btn" %>
     </div>
   <% end %>
 </div>
 
-<div style="text-align: center; margin-top: 20px;">
-  <%= link_to 'Back', students_path, style: "color: #007bff; text-decoration: none;" %>
+<div class="back_btn">
+  <%= link_to 'Back', students_path, class:"back_link" %>
 </div>

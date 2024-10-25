@@ -1,6 +1,8 @@
 <h1><%= @student.name %>'s Installments</h1>
 <ul>
+  <% unpaid_found = false %> <!-- Initialize a flag to track if there's any unpaid installment -->
   <% @student.installments.each_with_index do |installment, index| %>
+    <div id="error-message"></div>
     <li>
       Installment <%= index + 1 %>: <%= installment.amount %> 
       <% if installment.paid %>
@@ -8,17 +10,24 @@
         <div>payment date: <%= installment.payment_date&.strftime("%B %d, %Y") %> </div>
       <% else %>
         (Not Paid)
-        <%= form_with url: pay_installment_path(@student), local: true do |form| %>
-          <%= form.hidden_field :installment_index, value: index %>
-          <%= form.number_field :amount_paid, placeholder: "Amount" %>
-          <label>Action</label>
-          <%= form.select :action_choice, [['Add to next installment', 'add_to_next'], ['Create new installment', 'create_new']] %>
-          <%= form.submit "Pay Installment", style: "background-color: #28a745; color: white; padding: 8px 15px;" %>
+        <!-- If an unpaid installment has been found, disable forms for subsequent installments -->
+        <% unless unpaid_found %>
+          <%= form_with url: pay_installment_path(@student), local: true do |form| %>
+            <%= form.hidden_field :installment_index, value: index %>
+            <%= form.number_field :amount_paid, placeholder: "Amount", min:0, max: max_amount_to_be_paid(@student) %>
+            <label>Action</label>
+            <%= form.select :action_choice, [['Add to next installment', 'add_to_next'], ['Create new installment', 'create_new']] %>
+            <%= form.submit "Pay Installment", style: "background-color: #28a745; color: white; padding: 8px 15px;" %>
+          <% end %>
+        <% else %>
+          <p>You need to pay the pending installment before this one.</p>
         <% end %>
+        <% unpaid_found = true %> <!-- Mark the first unpaid installment -->
       <% end %>
     </li>
   <% end %>
 </ul>
+
 
 <div style="margin-top: 20px;">
   <%= link_to 'Back', students_path, style: "color: #007bff; text-decoration: none; font-size: 18px;" %>

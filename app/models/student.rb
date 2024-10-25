@@ -2,6 +2,8 @@ class Student < ApplicationRecord
   has_many :installments, dependent: :destroy
   after_create :create_installments
 
+  validate :total_amount_validation
+
   def create_installments
     installment_amount = (total_amount / number_of_installments).round(2)
     remainder = total_amount % number_of_installments
@@ -17,14 +19,14 @@ class Student < ApplicationRecord
 
     if amount_paid > installment.amount
       excess = amount_paid - installment.amount
-      installment.update(amount: amount_paid, paid: true, payment_date: DateTime.now)
-      adjust_excess(excess, index + 1)                   
+      installment.update(amount: amount_paid, paid: true,payment_date: DateTime.now)
+      adjust_excess(excess, index + 1)
     elsif amount_paid < installment.amount
       deficit = installment.amount - amount_paid
-      installment.update(amount: amount_paid, paid: true, payment_date: DateTime.now)
-      handle_deficit(deficit, index + 1, action)         
+      installment.update(amount: amount_paid, paid: true,payment_date: DateTime.now)
+      handle_deficit(deficit, index + 1, action)
     else
-      installment.update(amount: amount_paid, paid: true, payment_date: DateTime.now)
+      installment.update(amount: amount_paid, paid: true,payment_date: DateTime.now)
     end
   end
 
@@ -51,6 +53,12 @@ class Student < ApplicationRecord
       next_installment.update(amount: next_installment.amount + deficit)
     elsif action == 'create_new'
       installments.create(amount: deficit, paid: false)
+    end
+  end
+
+  def total_amount_validation
+    if installments.sum(:amount) > total_amount
+      errors.add(:base, "Installments cannot exceed total amount of #{total_amount}")
     end
   end
 end

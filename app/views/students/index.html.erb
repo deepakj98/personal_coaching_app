@@ -1,13 +1,13 @@
-<h1 style="color: #007bff; font-size: 36px; font-weight: bold; margin-bottom: 30px;">Students</h1>
+<h1 class="student_head">Students</h1>
 
 <div style="margin-bottom: 20px;">
-  <%= link_to 'Add New Student', new_student_path, style: "background-color: #28a745; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-size: 16px; font-weight: bold;" %>
+  <%= link_to 'Add New Student', new_student_path, class:"student_index_page" %>
 </div>
 
 <ol>
   <% @students.each do |student| %>
-    <li style="background-color: #f8f9fa; margin-bottom: 10px; padding: 15px; border-radius: 8px;">
-      <%= link_to student.name, student_path(student), style: "text-decoration: none; color: #007bff; font-size: 18px;" %>
+    <li class="student_list">
+      <%= link_to student.name, student_path(student), class: "student_show_page_btn" %>
     </li>
   <% end %>
 </ol>
