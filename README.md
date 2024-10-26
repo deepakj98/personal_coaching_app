@@ -4,21 +4,14 @@ This README would normally document whatever steps are necessary to get the
 application up and running.
 
 Things you may want to cover:
+clone the url
 
-* Ruby version
+git clone https://github.com/deepakj98/personal_coaching_app
 
-* System dependencies
+Ruby version : ruby "3.1.0"
 
-* Configuration
+Run "bundle install"
 
-* Database creation
+Run "rails db:create"
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Run "rails db:migrate"

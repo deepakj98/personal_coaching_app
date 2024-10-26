@@ -1,17 +1,17 @@
 <div class="student_new_page" style="">
   <h1>New Student</h1>
-  <%= form_with model: @student, local: true do |form| %>
-    <div style="margin-bottom: 15px;">
+  <%= form_with model: @student, data: {turbo_stream: true} do |form| %>
+    <div style="margin-bottom: 15px; padding: 15px;">
       <%= form.label :name, class:"form_label_tag" %>
       <%= form.text_field :name,required: true, class: "form_input_field" %>
     </div>
 
-    <div style="margin-bottom: 15px;">
+    <div style="margin-bottom: 15px; padding: 15px;">
       <%= form.label :total_amount, class:"form_label_tag" %>
-      <%= form.number_field :total_amount, min:10000, max:20000, required: true, class: "form_input_field" %>
+      <%= form.number_field :total_amount, required: true, class: "form_input_field" %>
     </div>
-
-    <div style="margin-bottom: 15px;">
+    <div id="student-error-message"></div>
+    <div style="margin-bottom: 15px; padding: 15px;">
       <%= form.label :number_of_installments, class:"form_label_tag" %>
       <%= form.number_field :number_of_installments,  required: true, class: "form_input_field" %>
     </div>
@@ -21,7 +21,7 @@
     </div>
   <% end %>
 </div>
-
-<div class="back_btn">
+<div class="">
   <%= link_to 'Back', students_path, class:"back_link" %>
 </div>
+
